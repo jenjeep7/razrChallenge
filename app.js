@@ -13,43 +13,61 @@ var app = angular.module("challengeApp", [])
             this.getArea = function () {
                 return Math.PI * this.radius * 2;
             }
-            this.circleInfo = "Circle: Radius = " + this.radius.toString() + " Area = " + this.getArea().toString();
+            this.Area = this.getArea();
+
+            this.Info = "Circle: Radius = " + this.radius.toString() + " Area = " + this.getArea().toString();
 
 
         }
+
         function squareObject(x) {
-            
+
             this.yCoord = x;
             this.xCoord = x;
             this.getArea = function () {
                 return x * 2;
             }
-            this.squareInfo = "Square: Size = " + this.yCoord.toString() + " Area = " + this.getArea().toString();
+            this.Area = this.getArea();
+            this.Info = "Square: Size = " + this.yCoord.toString() + " Area = " + this.getArea().toString();
 
 
         }
 
-        for(var i = 0; i < 50; i++) {
+        for (var i = 0; i < 50; i++) {
             var rr = Math.floor((Math.random() * 100) + 1);
             var rc = Math.floor((Math.random() * 100) + 1);
 
-            var circles = new circleObject(rc,rc,rr);
+            var object = new circleObject(rc, rc, rr);
             this.circleArray.push({
-                circles
+                object
             })
         };
 
-        for(var i = 0; i<50; i++) {
+        
+        for (var i = 0; i < 50; i++) {
             var x = Math.floor((Math.random() * 100) + 1);
-            var squares = new squareObject(x);
+            var object = new squareObject(x);
             this.squareArray.push({
-                squares
+                object
             })
         }
-            console.log(this.circleArray);
-            console.log(this.squareArray);
 
 
+        function sortArray(x, y) {
+            
+            var allArray = x.concat(y);
+
+            allArray.sort(function(a,b,) {
+                return a.object.Area - b.object.Area;
+            });
+            console.log(allArray);
+           
+        };
+
+        sortArray(this.circleArray, this.squareArray);
+
+        // console.log(this.circleArray);
+        // console.log(this.squareArray);
         // var redCircle = new circleObject(30, 14, 14);
         // console.log(redCircle);
 
