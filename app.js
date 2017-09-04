@@ -3,20 +3,28 @@ var app = angular.module("challengeApp", [])
 
     .controller("challengeController", function () {
         this.title = "RAZR Code Challenge";
-        this.circleArray = [];
-        this.squareArray = [];
+        this.shapeArray = [];
+        this.canvas = angular.element(document.querySelector('#canvas'));
+        var ctx = this.canvas[0].getContext('2d');
 
         function circleObject(x, y, r) {
             this.radius = r;
             this.yCoord = y;
             this.xCoord = x;
+            this.color = "blue";
             this.getArea = function () {
                 return Math.PI * this.radius * 2;
             }
             this.Area = this.getArea();
 
             this.Info = "Circle: Radius = " + this.radius.toString() + " Area = " + this.getArea().toString();
-
+            this.draw = function () {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
 
         }
 
@@ -24,12 +32,15 @@ var app = angular.module("challengeApp", [])
 
             this.yCoord = x;
             this.xCoord = x;
+            this.color = "red";
             this.getArea = function () {
                 return x * 2;
             }
             this.Area = this.getArea();
             this.Info = "Square: Size = " + this.yCoord.toString() + " Area = " + this.getArea().toString();
-
+            this.draw = function () {
+                console.log("working on squares");
+            }
 
         }
 
@@ -38,53 +49,34 @@ var app = angular.module("challengeApp", [])
             var rc = Math.floor((Math.random() * 100) + 1);
 
             var object = new circleObject(rc, rc, rr);
-            this.circleArray.push({
+            this.shapeArray.push({
                 object
-            })
+            });
+
         };
 
-        
+
         for (var i = 0; i < 50; i++) {
             var x = Math.floor((Math.random() * 100) + 1);
             var object = new squareObject(x);
-            this.squareArray.push({
+            this.shapeArray.push({
                 object
             })
         }
 
 
-        function sortArray(x, y) {
-            
-            var allArray = x.concat(y);
+        this.sortArray = function () {
 
-            allArray.sort(function(a,b,) {
+            this.shapeArray.sort(function (a, b, ) {
                 return a.object.Area - b.object.Area;
             });
-            console.log(allArray);
-           
+
         };
 
-        sortArray(this.circleArray, this.squareArray);
+        for (var i = 0; i < this.shapeArray.length; i++) {
+            // console.log(this.shapeArray[i].object.color);
+            this.shapeArray[i].object.draw();
+        }
 
-        // console.log(this.circleArray);
-        // console.log(this.squareArray);
-        // var redCircle = new circleObject(30, 14, 14);
-        // console.log(redCircle);
-
-        // window.onload = function () {
-        //     var canvas = document.getElementById("myCanvas");
-        //     var context = canvas.getContext("2d");
-        //     var centerX = canvas.width / 2;
-        //     var centerY = canvas.height / 2;
-        //     var radius = 10;
-
-        //     context.beginPath();
-        //     context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-        //     context.fillStyle = "black";
-        //     context.fill();
-        //     context.lineWidth = 1;
-        //     context.strokeStyle = "black";
-        //     context.stroke();
-        // };
     });
 
