@@ -6,6 +6,8 @@
 <head>
     <script src="./node_modules/angular/angular.js"></script>
     <script src="./app.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css">
+
 </head>
 
 <body>
@@ -14,10 +16,11 @@
                 <h1>{{vm.title}}</h1>
 
 
-        <canvas id="canvas">
-            <!-- <div height="{{shapes.object.yCoord}}" width="{{shapes.object.xCoord}}" style="background-color: blue; border: 1px solid black; padding: 5px;"></div> -->
+        <div id="canvas" ng-repeat="shapes in vm.shapeArray | orderBy: 'object.Area'">
+             <div ng-style="shapes.object.style"></div>
+             <p>{{shapes.object.Info}}</p>
 
-        </canvas>
+        </div>
     </div>
 
 
