@@ -1,10 +1,10 @@
 var app = angular.module("challengeApp", [])
 
 
-    .controller("challengeController", function ($scope, $interval) {
+    .controller("challengeController", function ($interval) {
         this.title = "RAZR Code Challenge";
         this.name = "Jennifer Johnson";
-        $scope.shapeArray = [];
+        this.shapeArray = [];
 
         function circleObject(r) {
             this.radius = r / 2;
@@ -38,41 +38,37 @@ var app = angular.module("challengeApp", [])
             }
             this.Area = this.getArea();
             this.Info = "Square: Size = " + this.height.toString() + " Area = " + this.getArea().toString();
+            
+        }
+        
+        // creates 50 new circle objects
+        for (var i = 0; i < 50; i++) {
+            var rr = Math.floor((Math.random() * 100) + 1);
+            var object = new circleObject(rr);
+            this.shapeArray.push({
+                object
+            });
 
+        };
+
+        // creates 50 new square objects
+        for (var i = 0; i < 50; i++) {
+            var h = Math.floor((Math.random() * 100) + 1);
+            var object = new squareObject(h);
+            this.shapeArray.push({
+                object
+            })
         }
 
-        $interval(function () {
-            // creates 50 new circle objects
-            for (var i = 0; i < 50; i++) {
-                var rr = Math.floor((Math.random() * 100) + 1);
-                var object = new circleObject(rr);
-                $scope.shapeArray.push({
-                    object
-                });
+        // this sorts the array of objects by area but doesn't display them in order.  orderBy needed
+        this.sortArray = function () {
+            this.shapeArray.sort(function (a, b) {
+                return a.object.Area - b.object.Area;
+            });
 
-            };
+        };
 
-            // creates 50 new square objects
-            for (var i = 0; i < 50; i++) {
-                var h = Math.floor((Math.random() * 100) + 1);
-                var object = new squareObject(h);
-                $scope.shapeArray.push({
-                    object
-                })
-            }
-
-            // this sorts the array of objects by area but doesn't display them in order.  orderBy needed
-            this.sortArray = function () {
-                $scope.shapeArray.sort(function (a, b) {
-                    return a.object.Area - b.object.Area;
-                });
-
-            };
-
-            this.sortArray();
-
-        }, 2000)
-
+        this.sortArray();
         // decided not to use draw and going with ng-style for the repeat
         // for (var i = 0; i < this.shapeArray.length; i++) {
         //     this.shapeArray[i].object.draw();
