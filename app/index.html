@@ -22,7 +22,7 @@
 
         </header>
 
-        <div id="canvas" ng-repeat="shapes in vm.shapeArray | orderBy: 'object.Area'">
+        <div id="canvas" ng-repeat="shapes in vm.shapeArray">
             <div ng-style="shapes.object.style"></div>
             <p>{{shapes.object.Info}}</p>
 

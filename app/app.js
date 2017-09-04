@@ -40,7 +40,7 @@ var app = angular.module("challengeApp", [])
             this.Info = "Square: Size = " + this.height.toString() + " Area = " + this.getArea().toString();
             
         }
-
+        
         // creates 50 new circle objects
         for (var i = 0; i < 50; i++) {
             var rr = Math.floor((Math.random() * 100) + 1);
@@ -67,6 +67,8 @@ var app = angular.module("challengeApp", [])
             });
 
         };
+
+        this.sortArray();
         // decided not to use draw and going with ng-style for the repeat
         // for (var i = 0; i < this.shapeArray.length; i++) {
         //     this.shapeArray[i].object.draw();
