@@ -13,12 +13,15 @@
 <body>
 
     <div ng-controller="challengeController as vm">
-                <h1>{{vm.title}}</h1>
+        <header>
+            <h1>{{vm.title}}</h1>
+            <p>{{vm.name}}</p>
 
+        </header>
 
         <div id="canvas" ng-repeat="shapes in vm.shapeArray | orderBy: 'object.Area'">
-             <div ng-style="shapes.object.style"></div>
-             <p>{{shapes.object.Info}}</p>
+            <div ng-style="shapes.object.style"></div>
+            <p>{{shapes.object.Info}}</p>
 
         </div>
     </div>
