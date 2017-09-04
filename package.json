@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jenjeep7/razrChallenge/issues"
   },
-  "homepage": "https://github.com/jenjeep7/razrChallenge#readme"
+  "homepage": "https://github.com/jenjeep7/razrChallenge#readme",
+  "dependencies": {
+    "express": "4.15.4"
+  }
 }
