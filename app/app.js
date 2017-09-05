@@ -16,7 +16,8 @@ var app = angular.module("challengeApp", [])
                 "width": this.height + "px"
             }
             this.getArea = function () {
-                return Math.PI * this.radius * 2;
+                console.log(Math.PI * this.radius * this.radius, this.radius)
+                return (Math.PI * this.radius) * this.radius;
             }
             this.Area = this.getArea();
             this.Info = "Circle: Radius = " + this.radius.toString() + " Area = " + this.getArea().toString();
@@ -28,7 +29,7 @@ var app = angular.module("challengeApp", [])
             this.color = "red";
             this.borderRadius = 0;
             this.getArea = function () {
-                return h * 2;
+                return h * h;
             }
             this.style = {
                 "background-color": "red",
